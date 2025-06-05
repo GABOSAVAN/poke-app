@@ -1,4 +1,3 @@
-// PokemonGrid.tsx
 import { useState, useEffect } from "react";
 import PokemonCard from "./PokemonCard";
 import PokemonSkeleton from "./PokemonSkeleton";
@@ -7,16 +6,13 @@ import type { PokemonGridProps } from "../types/interfaces";
 
 export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridProps) => {
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
-  // const [allImagesReady, setAllImagesReady] = useState(false);
 
-  // Reset when pokemons change or when we're loading
   useEffect(() => {
     if (isLoading) {
       setImagesLoaded(new Set());
     }
   }, [pokemons, currentPage, isLoading]);
 
-  // Handle individual image load
   const handleImageLoad = (pokemonId: number) => {
     setImagesLoaded(prev => {
       const newSet = new Set(prev);
@@ -25,7 +21,6 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
     });
   };
 
-  // Check if all images are loaded
   useEffect(() => {
     console.log(`Images loaded: ${imagesLoaded.size}, Total pokemons: ${pokemons.length}`);
     if (pokemons.length > 0 && imagesLoaded.size === pokemons.length && !isLoading) {
@@ -33,7 +28,6 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
     }
   }, [imagesLoaded.size, pokemons.length, isLoading]);
 
-  // Show skeletons only if actively loading from API
   const shouldShowSkeletons = isLoading;
 
   return (
@@ -61,7 +55,6 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
                 ))
             }
             
-            {/* Precarga de imágenes invisibles solo cuando estamos cargando inicialmente */}
             {isLoading && pokemons.length > 0 && (
               <div className="absolute -top-[9999px] left-0 opacity-0 pointer-events-none">
                 {pokemons.map((pokemon) => (
