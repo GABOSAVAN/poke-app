@@ -54,5 +54,6 @@ export const usePokemonData = () => {
     total,
     nextPage,
     prevPage,
+    setPage,
   };
 };

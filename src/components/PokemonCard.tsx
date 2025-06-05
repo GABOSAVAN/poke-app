@@ -6,11 +6,16 @@ interface Props {
     name: string;
     image: string;
   };
+  currentPage: number;
 }
 
-export default function PokemonCard({ pokemon }: Props) {
+export default function PokemonCard({ pokemon, currentPage }: Props) {
   return (
-    <Link to={`/details/${pokemon.id}`} className="block">
+    <Link
+      to={`/details/${pokemon.id}`}
+      state={{ fromPage: currentPage }}
+      className="block"
+    >
       <div className="bg-white rounded-2xl shadow-md p-4 transition-all hover:scale-105 hover:shadow-lg cursor-pointer">
         <img
           src={pokemon.image}

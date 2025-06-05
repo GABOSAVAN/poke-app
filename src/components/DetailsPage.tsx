@@ -1,5 +1,6 @@
+// DetailsPage.tsx
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 export interface Pokemon {
   id: number;
@@ -31,10 +32,16 @@ export interface Pokemon {
 
 export default function Details() {
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isFlipped, setIsFlipped] = useState(false);
+
+  // Get fromPage from location.state or default to 1
+  const fromPage = location.state?.fromPage ?? 1;
+  console.log("fromPage...", fromPage )
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -43,7 +50,6 @@ export default function Details() {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (!response.ok) throw new Error("Error al obtener el pokemon");
         const data = await response.json();
-        console.log("data:", data);
         setPokemon(data);
       } catch {
         setError(true);
@@ -73,6 +79,13 @@ export default function Details() {
   return (
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+        <button
+          onClick={() => navigate("/", { state: { page: fromPage } })}
+          className="mb-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+        >
+          ← Volver
+        </button>
+
         <div className="w-full text-center">
           <p className="text-[#181811] tracking-light text-[32px] font-bold leading-tight min-w-72 capitalize">
             {pokemon.name}
@@ -109,19 +122,6 @@ export default function Details() {
             </div>
           </div>
         </div>
-
-        {/* <div className="flex justify-center">
-          <div className="flex justify-center w-130 h-130 grow @container p-4">
-            <div className="w-full gap-1 overflow-hidden @[480px]:gap-2 aspect-[2/3] rounded-xl flex object-contain">
-              <div
-                className="w-full bg-center bg-no-repeat aspect-auto rounded-none flex-1"
-                style={{
-                  backgroundImage: `url(${pokemon.sprites.other["official-artwork"].front_default})`,
-                }}
-              ></div>
-            </div>
-          </div>
-        </div> */}
 
         <div className="flex justify-center gap-3 p-3 flex-wrap pr-4">
           <div className="columns-1">
@@ -185,25 +185,22 @@ export default function Details() {
                     <td className="table-col-120 h-[72px] px-4 py-2 w-[400px] text-[#181811] text-sm font-normal leading-normal capitalize">
                       {stat.name}
                     </td>
-                    <td className="table-col-240 h-[72px] px-4 py-2 w-[400px] text-[#86865f] text-sm font-normal leading-normal">
-                      {base_stat}
+                    <td className="table-col-240 h-[72px] px-4 py-2 w-[400px]">
+                      <div className="flex h-6 items-center rounded bg-[#e1e1d5] px-1">
+                        <div
+                          style={{ width: `${base_stat}%` }}
+                          className="h-4 rounded bg-[#424532]"
+                        />
+                      </div>
+                      <p className="text-[#181811] text-sm font-semibold leading-normal">
+                        {base_stat}
+                      </p>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
-          <style>
-            {`
-              @container (max-width: 120px) {
-                .table-col-120 { display: none; }
-              }
-              @container (max-width: 240px) {
-                .table-col-240 { display: none; }
-              }
-            `}
-          </style>
         </div>
       </div>
     </div>
