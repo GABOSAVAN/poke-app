@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
+import type { PokemonCardProps } from "../types/interfaces";
 
-interface Props {
-  pokemon: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  currentPage: number;
-}
-
-export default function PokemonCard({ pokemon, currentPage }: Props) {
+export default function PokemonCard({ pokemon, currentPage }: PokemonCardProps) {
   return (
     <Link
       to={`/details/${pokemon.id}`}

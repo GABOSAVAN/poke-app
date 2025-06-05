@@ -1,19 +1,9 @@
 // PokemonGrid.tsx
 import PokemonCard from "./PokemonCard";
 import Search from "./Search";
+import type { PokemonGridProps } from "../types/interfaces";
 
-interface SmallPokemon {
-  id: number;
-  name: string;
-  image: string;
-}
-
-interface Props {
-  pokemons: SmallPokemon[];
-  currentPage: number;
-}
-
-export const PokemonGrid = ({ pokemons, currentPage }: Props) => {
+export const PokemonGrid = ({ pokemons, currentPage }: PokemonGridProps) => {
   return (
     <div className="sm:px20 md:px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">

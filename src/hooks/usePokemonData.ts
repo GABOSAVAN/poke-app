@@ -1,11 +1,9 @@
-// src/hooks/usePokemonData.ts
-
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../services/getPokemons';
-import type { Pokemon } from '../services/getPokemons';
+import type { SmallPokemon } from '../types/interfaces';
 
 export const usePokemonData = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<SmallPokemon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [page, setPage] = useState(1);
@@ -21,7 +19,7 @@ export const usePokemonData = () => {
 
       try {
         const { results, total } = await getPokemons(limit, offset);
-        setPokemons(results); // ✅ results es un Pokemon[]
+        setPokemons(results); // ✅ results es un SmallPokemon[]
         setTotal(total);
       } catch (error) {
         console.error(error);
