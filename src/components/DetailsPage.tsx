@@ -21,8 +21,9 @@ export interface Pokemon {
   }[];
   sprites: {
     other: {
-      ["official-artwork"]: {
+      ["showdown"]: {
         front_default: string;
+        back_default: string;
       };
     };
   };
@@ -33,6 +34,7 @@ export default function Details() {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -41,6 +43,7 @@ export default function Details() {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (!response.ok) throw new Error("Error al obtener el pokemon");
         const data = await response.json();
+        console.log("data:", data);
         setPokemon(data);
       } catch {
         setError(true);
@@ -76,7 +79,38 @@ export default function Details() {
           </p>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center py-10">
+          <div
+            className="relative w-80 h-80 cursor-pointer perspective"
+            onClick={() => setIsFlipped(!isFlipped)}
+          >
+            <div
+              className={`w-full h-full transition-transform duration-700 transform-style-preserve-3d ${
+                isFlipped ? "rotate-y-180" : ""
+              }`}
+            >
+              {/* Cara frontal */}
+              <div className="absolute w-full h-full backface-hidden rounded-xl overflow-hidden flex items-center justify-center">
+                <img
+                  src={pokemon.sprites.other.showdown.front_default}
+                  alt={pokemon.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Cara trasera */}
+              <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-xl overflow-hidden flex items-center justify-center">
+                <img
+                  src={pokemon.sprites.other.showdown.back_default}
+                  alt={`${pokemon.name} back`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="flex justify-center">
           <div className="flex justify-center w-130 h-130 grow @container p-4">
             <div className="w-full gap-1 overflow-hidden @[480px]:gap-2 aspect-[2/3] rounded-xl flex object-contain">
               <div
@@ -87,7 +121,7 @@ export default function Details() {
               ></div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex justify-center gap-3 p-3 flex-wrap pr-4">
           <div className="columns-1">
