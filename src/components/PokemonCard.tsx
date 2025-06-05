@@ -2,11 +2,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { PokemonCardProps } from "../types/interfaces";
 
-export default function PokemonCard({ pokemon, currentPage }: PokemonCardProps) {
+export default function PokemonCard({ pokemon, currentPage, onImageLoad }: PokemonCardProps) {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
     setImageError(true);
+    // También llamar onImageLoad cuando hay error para no bloquear el loading
+    if (onImageLoad) {
+      onImageLoad(pokemon.id);
+    }
+  };
+
+  const handleImageLoad = () => {
+    if (onImageLoad) {
+      onImageLoad(pokemon.id);
+    }
   };
 
   return (
@@ -27,6 +37,7 @@ export default function PokemonCard({ pokemon, currentPage }: PokemonCardProps) 
               alt={pokemon.name}
               className="w-32 h-32 mx-auto"
               onError={handleImageError}
+              onLoad={handleImageLoad}
               loading="lazy"
             />
           )}

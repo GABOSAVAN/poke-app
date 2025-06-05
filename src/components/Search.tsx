@@ -22,7 +22,6 @@ export default function Search() {
           <input
             placeholder="Bulbasaur, Charmander, Squirtle"
             className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1c1c0d] focus:outline-0 focus:ring-0 border-none bg-[#f4f4e6] focus:border-none h-full placeholder:text-[#9e9e47] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-            // value=""
           />
         </div>
       </label>

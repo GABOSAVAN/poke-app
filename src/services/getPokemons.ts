@@ -1,5 +1,3 @@
-// src/services/getPokemons.ts
-
 export interface Pokemon {
   id: number;
   name: string;
@@ -18,7 +16,6 @@ export const getPokemons = async (limit = 20, offset = 0): Promise<{ results: Po
   }
 
   const data: PokemonListResponse = await response.json();
-  console.log(data.results)
 
   const results = data.results.map((pokemon, index) => {
     const id = offset + index + 1;

@@ -1,38 +1,15 @@
 // DetailsPage.tsx
-import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import type { Pokemon } from "../types/interfaces";
+import { usePokemonDetails } from "../hooks/usePokemonDetails";
 
 export default function Details() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [isFlipped, setIsFlipped] = useState(false);
-
+  
+  const { pokemon, error, loading, isFlipped, setIsFlipped } = usePokemonDetails(id);
+  
   const fromPage = location.state?.fromPage ?? 1;
-
-  useEffect(() => {
-
-    window.scrollTo(0, 0);
-    const fetchPokemon = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        if (!response.ok) throw new Error("Error al obtener el pokemon");
-        const data = await response.json();
-        setPokemon(data);
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) fetchPokemon();
-  }, [id]);
 
   if (loading)
     return (
@@ -40,6 +17,7 @@ export default function Details() {
         <p className="text-center font-bold">Cargando detalles...</p>
       </div>
     );
+    
   if (error || !pokemon)
     return (
       <div className="flex items-center justify-center h-screen w-screen">

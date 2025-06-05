@@ -7,21 +7,20 @@ import type { PokemonGridProps } from "../types/interfaces";
 
 export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridProps) => {
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
-  const [allImagesReady, setAllImagesReady] = useState(false);
+  // const [allImagesReady, setAllImagesReady] = useState(false);
 
-  // Reset when pokemons change
+  // Reset when pokemons change or when we're loading
   useEffect(() => {
-    console.log('Pokemon list changed or component mounted');
-    setImagesLoaded(new Set());
-    setAllImagesReady(false);
-  }, [pokemons, currentPage]);
+    if (isLoading) {
+      setImagesLoaded(new Set());
+    }
+  }, [pokemons, currentPage, isLoading]);
 
   // Handle individual image load
   const handleImageLoad = (pokemonId: number) => {
     setImagesLoaded(prev => {
       const newSet = new Set(prev);
       newSet.add(pokemonId);
-      console.log(`Image loaded for Pokemon ${pokemonId}. Total loaded: ${newSet.size}/${pokemons.length}`);
       return newSet;
     });
   };
@@ -29,14 +28,13 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
   // Check if all images are loaded
   useEffect(() => {
     console.log(`Images loaded: ${imagesLoaded.size}, Total pokemons: ${pokemons.length}`);
-    if (pokemons.length > 0 && imagesLoaded.size === pokemons.length) {
+    if (pokemons.length > 0 && imagesLoaded.size === pokemons.length && !isLoading) {
       console.log('All images loaded, showing cards');
-      setAllImagesReady(true);
     }
-  }, [imagesLoaded.size, pokemons.length]);
+  }, [imagesLoaded.size, pokemons.length, isLoading]);
 
-  // Show skeletons if loading OR if images are not ready
-  const shouldShowSkeletons = isLoading || !allImagesReady;
+  // Show skeletons only if actively loading from API
+  const shouldShowSkeletons = isLoading;
 
   return (
     <div className="sm:px20 md:px-40 flex flex-1 justify-center py-5">
@@ -58,12 +56,13 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
                     key={pokemon.id} 
                     pokemon={pokemon} 
                     currentPage={currentPage}
+                    onImageLoad={handleImageLoad}
                   />
                 ))
             }
             
-            {/* Precarga de imágenes invisibles */}
-            {!allImagesReady && pokemons.length > 0 && (
+            {/* Precarga de imágenes invisibles solo cuando estamos cargando inicialmente */}
+            {isLoading && pokemons.length > 0 && (
               <div className="absolute -top-[9999px] left-0 opacity-0 pointer-events-none">
                 {pokemons.map((pokemon) => (
                   <img

@@ -1,4 +1,3 @@
-// HomePage.tsx
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { usePokemonData } from "../hooks/usePokemonData";
@@ -8,7 +7,6 @@ export default function HomePage() {
   const location = useLocation();
   const { pokemons, isLoading, hasError, page, total, nextPage, prevPage, setPage } = usePokemonData();
   const totalPages = Math.ceil(total / 20);
-  console.log("isLoading 1 = ", isLoading)
 
   useEffect(() => {
     if (location.state?.page) {
@@ -16,7 +14,6 @@ export default function HomePage() {
     }
   }, [location.state, setPage]);
 
-  console.log("isLoading 2 = ", isLoading)
 
   return (
     <div className="flex flex-col gap-4 p-4">
