@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const location = useLocation();
+  const isDetailsPage = location.pathname.startsWith('/details/');
+
   return (
     <>
       <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4f4e6] px-10 py-3">
@@ -23,19 +26,14 @@ export default function Header() {
         </div>
         <div className="flex flex-1 justify-end gap-8">
           <div className="flex items-center gap-9">
-            <Link
-              className="text-[#1c1c0d] text-sm font-medium leading-normal"
-              to="/"
-            >
-              Home
-            </Link>
-            {/* Aquí puedes redirigir a un detalle genérico como ejemplo */}
-            <Link
-              className="text-[#1c1c0d] text-sm font-medium leading-normal"
-              to="/details/1"
-            >
-              Details
-            </Link>
+            {isDetailsPage && (
+              <Link
+                className="text-[#1c1c0d] text-sm font-medium leading-normal"
+                to="/"
+              >
+                Home
+              </Link>
+            )}
           </div>
         </div>
       </header>

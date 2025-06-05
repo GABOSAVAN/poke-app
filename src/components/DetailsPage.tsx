@@ -12,11 +12,11 @@ export default function Details() {
   const [loading, setLoading] = useState(true);
   const [isFlipped, setIsFlipped] = useState(false);
 
-  // Get fromPage from location.state or default to 1
   const fromPage = location.state?.fromPage ?? 1;
-  console.log("fromPage...", fromPage )
 
   useEffect(() => {
+
+    window.scrollTo(0, 0);
     const fetchPokemon = async () => {
       try {
         setLoading(true);
@@ -52,12 +52,11 @@ export default function Details() {
   return (
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-        <button
-          onClick={() => navigate("/", { state: { page: fromPage } })}
-          className="mb-4 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-        >
-          ← Volver
-        </button>
+        <div>
+          <button onClick={() => navigate("/", { state: { page: fromPage } })} className="font-extrabold">
+            ← Volver
+          </button>
+        </div>
 
         <div className="w-full text-center">
           <p className="text-[#181811] tracking-light text-[32px] font-bold leading-tight min-w-72 capitalize">

@@ -37,6 +37,7 @@ export interface SmallPokemon {
   export interface PokemonGridProps {
     pokemons: SmallPokemon[];
     currentPage: number;
+    isLoading: boolean;
   }
   
   export interface PokemonCardProps {
