@@ -1,11 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import type { SmallPokemon } from '../types/interfaces';
 import useDebounce from './useDebounce';
+import { searchService } from '../services/searchService';
 
-/**
- * Hook personalizado para manejar la búsqueda de pokémons
- * @returns Objeto con estado y funciones para la búsqueda
- */
 export function usePokemonSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<SmallPokemon[]>([]);
@@ -27,17 +24,7 @@ export function usePokemonSearch() {
     setError(null);
 
     try {
-      const response = await fetch(
-        `http://localhost:3001/pokemon/search?name=${encodeURIComponent(
-          term.trim()
-        )}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data: SmallPokemon[] = await response.json();
+      const data: SmallPokemon[] = await searchService.searchPokemons(term);
       setResults(data);
     } catch (err) {
       console.error("Error al buscar pokémons:", err);
