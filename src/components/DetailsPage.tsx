@@ -6,9 +6,10 @@ export default function Details() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  
-  const { pokemon, error, loading, isFlipped, setIsFlipped } = usePokemonDetails(id);
-  
+
+  const { pokemon, error, loading, isFlipped, setIsFlipped } =
+    usePokemonDetails(id);
+
   const fromPage = location.state?.fromPage ?? 1;
 
   if (loading)
@@ -17,7 +18,7 @@ export default function Details() {
         <p className="text-center font-bold">Cargando detalles...</p>
       </div>
     );
-    
+
   if (error || !pokemon)
     return (
       <div className="flex items-center justify-center h-screen w-screen">
@@ -31,12 +32,15 @@ export default function Details() {
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
         <div>
-          <button onClick={() => navigate("/", { state: { page: fromPage } })} className="font-extrabold">
+          <button
+            onClick={() => navigate("/", { state: { page: fromPage } })}
+            className="font-extrabold"
+          >
             ← Volver
           </button>
         </div>
 
-        <div className="w-full text-center">
+        <div className="w-full text-center pb-3">
           <p className="text-[#181811] tracking-light text-[32px] font-bold leading-tight min-w-72 capitalize">
             {pokemon.name}
           </p>
@@ -114,7 +118,7 @@ export default function Details() {
         </div>
 
         <h3 className="text-[#181811] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
-          Base Stats
+          Estadística básicas
         </h3>
         <div className="px-4 py-3 @container">
           <div className="flex overflow-hidden rounded-xl border border-[#e1e1d5] bg-[#fbfbf9]">

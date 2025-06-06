@@ -19,7 +19,7 @@ export const usePokemonData = () => {
 
       try {
         const { results, total } = await getPokemons(limit, offset);
-        setPokemons(results); // ✅ results es un SmallPokemon[]
+        setPokemons(results);
         setTotal(total);
       } catch (error) {
         console.error(error);
