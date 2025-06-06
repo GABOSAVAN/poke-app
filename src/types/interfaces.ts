@@ -1,5 +1,3 @@
-// src/types/interfaces.ts
-
 export interface SmallPokemon {
     id: number;
     name: string;

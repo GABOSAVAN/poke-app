@@ -22,10 +22,6 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
   };
 
   useEffect(() => {
-    console.log(`Images loaded: ${imagesLoaded.size}, Total pokemons: ${pokemons.length}`);
-    if (pokemons.length > 0 && imagesLoaded.size === pokemons.length && !isLoading) {
-      console.log('All images loaded, showing cards');
-    }
   }, [imagesLoaded.size, pokemons.length, isLoading]);
 
   const shouldShowSkeletons = isLoading;

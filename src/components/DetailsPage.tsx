@@ -42,9 +42,9 @@ export default function Details() {
           </p>
         </div>
 
-        <div className="flex justify-center py-10">
+        <div className="flex justify-center py-1">
           <div
-            className="relative w-80 h-80 cursor-pointer perspective"
+            className="relative w-100 h-100 cursor-pointer perspective"
             onClick={() => setIsFlipped(!isFlipped)}
           >
             <div
