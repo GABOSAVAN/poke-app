@@ -6,8 +6,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4f4e6] px-10 py-3">
-        <div className="flex items-center gap-4 text-[#1c1c0d]">
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4f4e6] px-10 py-3 bg-gray-400">
+        <div className="flex items-center gap-2 text-fuchsia-700">
           <div className="size-4">
             <svg
               viewBox="0 0 48 48"
@@ -20,7 +20,7 @@ export default function Header() {
               ></path>
             </svg>
           </div>
-          <h2 className="text-[#1c1c0d] text-lg font-bold leading-tight tracking-[-0.015em]">
+          <h2 className="text-fuchsia-700 text-lg font-bold leading-tight tracking-[-0.015em]">
             PokeApp
           </h2>
         </div>
@@ -28,7 +28,7 @@ export default function Header() {
           <div className="flex items-center gap-9">
             {isDetailsPage && (
               <Link
-                className="text-[#1c1c0d] text-sm font-medium leading-normal"
+                className="text-fuchsia-700 text-sm font-medium leading-normal"
                 to="/"
               >
                 Home

@@ -31,7 +31,7 @@ export const PokemonGrid = ({ pokemons, currentPage, isLoading }: PokemonGridPro
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
         <Search />
         <div className="flex flex-wrap justify-between gap-3 p-4">
-          <p className="text-[#1c1c0d] tracking-light text-[32px] font-bold leading-tight min-w-72">
+          <p className="tracking-light text-[32px] font-bold text-white leading-tight min-w-72">
             Pokemons
           </p>
         </div>

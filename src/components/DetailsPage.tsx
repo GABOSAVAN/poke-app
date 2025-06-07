@@ -22,26 +22,26 @@ export default function Details() {
   if (error || !pokemon)
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <p className="text-center text-red-600 font-bold">
+        <p className="text-center text-red-400 font-bold">
           No se pudo cargar el Pokémon.
         </p>
       </div>
     );
 
   return (
-    <div className="px-40 flex flex-1 justify-center py-5">
+    <div className="px-40 flex flex-1 justify-center py-5 bg-gray-950">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
         <div>
           <button
             onClick={() => navigate("/", { state: { page: fromPage } })}
-            className="font-extrabold"
+            className="font-extrabold text-white"
           >
             ← Volver
           </button>
         </div>
 
         <div className="w-full text-center pb-3">
-          <p className="text-[#181811] tracking-light text-[32px] font-bold leading-tight min-w-72 capitalize">
+          <p className="text-white tracking-light text-[32px] font-bold leading-tight min-w-72 capitalize">
             {pokemon.name}
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function Details() {
 
         <div className="flex justify-center gap-3 p-3 flex-wrap pr-4">
           <div className="columns-1">
-            <h3 className="text-[#181811] text-lg flex justify-center font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+            <h3 className="text-white text-lg flex justify-center font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
               Types
             </h3>
             <div className="flex gap-3 p-3 flex-wrap pr-4">
@@ -98,26 +98,26 @@ export default function Details() {
 
           <div className="columns-2">
             <div className="columns-1">
-              <h3 className="text-[#181811] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+              <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
                 Height
               </h3>
-              <p className="text-[#181811] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
                 {(pokemon.height / 10).toFixed(1)} m
               </p>
             </div>
 
             <div className="columns-1">
-              <h3 className="text-[#181811] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+              <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
                 Weight
               </h3>
-              <p className="text-[#181811] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
                 {(pokemon.weight / 10).toFixed(1)} kg
               </p>
             </div>
           </div>
         </div>
 
-        <h3 className="text-[#181811] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
+        <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
           Estadística básicas
         </h3>
         <div className="px-4 py-3 @container">
