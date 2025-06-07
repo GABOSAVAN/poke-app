@@ -14,8 +14,8 @@ export default function Details() {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center h-screen w-screen">
-        <p className="text-center font-bold">Cargando detalles...</p>
+      <div className="flex items-center justify-center h-screen w-screen bg-gray-950">
+        <p className="text-center font-bold text-white">Cargando detalles...</p>
       </div>
     );
 

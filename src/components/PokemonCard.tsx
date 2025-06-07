@@ -25,9 +25,9 @@ export default function PokemonCard({ pokemon, currentPage, onImageLoad }: Pokem
       className="block"
     >
       <div className="bg-gray-400 rounded-xl shadow-md transition-all shadow-amber-50 hover:scale-107 hover:shadow-amber-50 cursor-pointer">
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative pt-3">
           {imageError ? (
-            <div className="w-32 h-32 bg-gray-100 rounded flex items-center justify-center">
+            <div className="w-35 h-35 bg-gray-100 rounded flex items-center justify-center">
               <span className="text-gray-400 text-sm">No image</span>
             </div>
           ) : (
@@ -41,7 +41,7 @@ export default function PokemonCard({ pokemon, currentPage, onImageLoad }: Pokem
             />
           )}
         </div>
-        <h3 className="mt-4 text-center text-lg font-semibold capitalize text-gray-800">
+        <h3 className="mt-4 text-center text-lg font-semibold capitalize text-gray-800 pb-3">
           {pokemon.name}
         </h3>
       </div>
