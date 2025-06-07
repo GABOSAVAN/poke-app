@@ -22,7 +22,7 @@ export default function HomePage() {
 
       <PokemonGrid pokemons={pokemons} currentPage={page} isLoading={isLoading}/>
 
-      <div className="flex justify-center gap-4 mt-6">
+      <div className="flex justify-center gap-4 mt-3 mb-15">
         <button
           onClick={prevPage}
           disabled={page === 1}
