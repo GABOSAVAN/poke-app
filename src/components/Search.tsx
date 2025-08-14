@@ -55,7 +55,7 @@ export default function Search() {
 
       {/* Resultados de búsqueda flotantes */}
       {(results.length > 0 || isLoading || error) && searchTerm && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 z-50 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden min-w-40 md:w-full lg:w-90">
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 z-50 mt-1 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden min-w-40 md:w-full lg:w-90">
           {/* Indicador de carga */}
           {isLoading && (
             <div className="flex justify-center py-4">
